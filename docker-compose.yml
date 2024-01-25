@@ -1,0 +1,17 @@
+version: '3'
+services:
+  seamless:
+    build: .
+    volumes:
+      - ./seamless-server:/home/user/app/seamless-server # for hot reload in DEV
+    ports:
+      - "80:7860"
+    environment:
+      - NODE_ENV=development
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
